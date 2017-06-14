@@ -1,0 +1,38 @@
+destination<- c("西北工业大学","西北大学","西安交通大学","陕西师范大学","长安大学","西北工业大学","西安电子科技大学","西安邮电大学","西安建筑科技大学","西安理工大学") #终点
+origin<- rep("xian",length(destination)) #起点
+map_data<- data.frame(origin,destination) #合成数据框格式的作图数据
+map_out1<-remapB(zoom=10,
+                 color="dark",
+                 title="心形迁移图",
+                 subtitle="",
+                 markLineData=map_data,
+                 markPointData=destination, 
+                 markLineTheme = markLineControl(
+                   symbol = NA, 
+                   symbolSize = c(0,4), 
+                   smooth = T, 
+                   smoothness =0.2, 
+                   effect = T, 
+                   lineWidth = 2, 
+                   lineType ="dotted", 
+                   color ="white"),
+                 markPointTheme = markPointControl(
+                   symbol = "heart",
+                   symbolSize = "Random", 
+                   effect = T, 
+                   effectType = "scale", 
+                   color = "white")
+)
+plot(map_out1)
+
+
+#第二个
+githubinstall('remapB')
+library(REmap)
+set.seed(111)
+origin <- rep("北京",12)
+destination <- c('上海','广州','大连','南宁','南昌','郑州','信阳','西安','宝鸡','西藏','新疆','haerbing')
+dat <- data.frame(origin,destination)
+out <- remapB(dat,title = "路径图",subtitle = "theme::Dark")
+plot(out)
+?remapB
